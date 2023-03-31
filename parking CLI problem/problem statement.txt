@@ -1,0 +1,64 @@
+Parking Management System
+You have been asked to design the parking management system of a shopping mall. It has N floors reserved for parking. On each floor, there are X parking slots. Out of these, few parking slots are reserved for senior citizens, i.e. the ones which are closer to the entrance.
+
+Each floor would be numbered using alphabets A to Z. For example, if there are 5 floors reserved for parking, they will be numbered as A, B, C, D and E.
+
+Parking slot on each floor will use following conventions,
+FLOOR-SLOT
+
+For example, if there are 10 parkings on each floor, the parking slots on first floor will be numbered as, A-1, A-2, A-3, ..., A-10. Similarly, parking slots on 2nd floor will be numebred as B-1, B-2, B-3,..., B-10
+
+You have to implement a system, which allocates a parking slot when a new car arrives and computes charge to be paid when it leaves the shopping mall. Additionally, you have to also generate a report with details of parking slot and list of cars, which used that slot. Please see below description for clarity.
+
+Following are the initial inputs to the program:
+
+No of floors: An integer, representing number of floors. It will be between 1 and 26, so they can be numbered using alphabets A-Z
+No of parking slots on each floor: An integer representing total parking slots on a floor. This will be between 1 and 100
+Parking slots reserved for senior citizens: A string representing the reserved parkings. For example A-1 A-10 B-2 B-5 C-1 C-8  D-2 D-4 E-5 E-10. Each parking slot is separated by space and indicates the exact slot on each floor, reserved for senior citizens.
+For example, the initial inputs will look like as follows, indicating there are 5 floors, 10 parking slots on each floor and reserved slots (as a string) on each floor.
+
+1. 5
+2. 10
+3. A-1 A-10 B-2 B-5 C-1 C-8 D-2 D-4 E-5 E-10
+As a next, the program will accept series of inputs in following format. All these inputs (including above) will be entered using command line/console.
+
+Input: CHECKIN GJ03DF-2708 08:15am NR
+
+This indicates the car with number GJ03DF-2708 arrived at 8:15am. NR indicates the car does not have any Senior Citizen passengers and so it should use non-resevred parking slot. In this case, the program should allocate first available parking slot, but exlcuding the ones, reserved for senior citizens. So, output will be A-2
+
+Output: A-2 (because A-1 is reserved for senior citizen)
+
+Next Input: CHECKIN GJT-3293 09:00am R
+Output: A-1 (R indicates that the reserved parking slot should be allocated to this car as it has Senior Citizen passengers, and hence A-1 is allocated)
+
+After few more inputs.
+
+Next Input: CHECKIN GJ05GH-2808 11:00am NR
+Output: PARKING FULL (As all parking slots are full)
+Notes: The reserved slots can be used by senior citizens only.
+
+Next Input: CHECKOUT GJ03DF-2708 11:45am
+Output: 80 (The first car arrived at 8:15, leaves after 3.5 hours. So that parking slot is vacated and program displays the charge to be paid)
+
+The charge will be calculated as as follows:
+
+<= 2 hours: 50 Rs
+>2 hours and <=4 hours: 80 Rs
+>4 hours: 100 Rs
+Next Input: CHECKOUT GJT-3293 12:00pm
+Output:  80 (Second car leaves after 3 hours)
+
+Next Input: CHECKIN GJ09DF-9687 12:15pm NR
+Output: A-2 (A-2 slot is vacant at this moment, and so it should be allocated to this car, having non-senior citizen passenger)
+
+Next Input: CHECKOUT GJ09DF-9687 12:45pm
+Output:  50 (Car left within 30 mins)
+
+Next Input: GENERATE REPORT
+
+It will generate and display report in the following format. Output should be sorted by parking slot number, followed by checkin time, as shown below. In the report, include only those cars, which left the mall, i.e. the ones for which CHECK IN and CHECK OUT time are recorded in the system.
+
+PARKING SLOT, CAR NO, CHECK IN TIME, CHECK OUT TIME, CHARGES, CATEGORY
+A-1, GJT-3293, 09:00am, 12:00pm 80, R
+A-2, GJ03DF-2708, 08:15am, 11:45am, 80, NR
+A-2, GJ09DF-9687, 12:15pm, 12:45pm, 50, NR
